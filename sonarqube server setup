@@ -1,0 +1,17 @@
+      1- sudo apt update
+      2- sudo apt install openjdk-21-jdk -y  # pre-req. minimun version 21 required
+      3- cd /opt
+      4- sudo apt install unzip wget -y
+      5- sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-26.4.0.121862.zip  # change the sonarqube server version as per requirement
+      6- sudo unzip sonarqube-*.zip
+      7- sudo mv sonarqube-26.4.0.121862 sonarqube # rename
+      8- sudo useradd sonar
+      9- sudo chown -R sonar:sonar /opt/sonarqube
+     10- sudo sysctl -w vm.max_map_count=262144
+     11- sudo sysctl -w fs.file-max=65536
+     12- sudo nano ~/.bashrc # add below lines to make sonarqube command run from anywhere
+         alias start-sonar='sudo -u sonar /opt/sonarqube/bin/linux-x86-64/sonar.sh start'
+         alias stop-sonar='sudo -u sonar /opt/sonarqube/bin/linux-x86-64/sonar.sh stop'
+     13- source ~/.bashrc  # refresh bash
+     14- start-sonar
+     15- stop-sonar
