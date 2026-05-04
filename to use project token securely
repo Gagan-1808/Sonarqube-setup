@@ -1,0 +1,30 @@
+Store Token in Jenkins Credentials
+Step 1 — Add token to Jenkins credentials
+
+Go to Jenkins → Manage Jenkins → Credentials → Global → Add Credentials
+Set:
+
+Kind: Secret text
+Secret: <your sonarqube token>
+ID: sonar-token
+Description: SonarQube project token
+
+
+Click Save
+
+Step 2 — Remove token from sonar-project.properties
+
+Step 3 — Inject token via Jenkins pipeline
+
+stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonarqube') {          // injects SONAR_HOST_URL automatically
+            withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                sh '''
+                    sonar-scanner \
+                      -Dsonar.token=${SONAR_TOKEN}
+                '''
+            }
+        }
+    }
+}
