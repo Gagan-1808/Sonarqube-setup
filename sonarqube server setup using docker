@@ -1,0 +1,8 @@
+create database conainer first  
+
+docker run -d --name sonarqube-db -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -e POSTGRES_DB=sonarqube  postgres:14.22  
+
+then run the sonarqube server  
+
+docker run -d --name sonarqube-db -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -e POSTGRES_DB=sonarqube  postgres:14.22
+
