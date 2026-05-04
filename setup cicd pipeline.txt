@@ -1,0 +1,38 @@
+install sonarqube server, sonar-scanner scanner and jenkins.
+then install apt install -y python3-venv in your server.
+
+Step 1 — Configure SonarQube in Jenkins
+In SonarQube:
+
+Go to My Account → Security → Generate Token → copy the token
+
+In Jenkins → Manage Jenkins → System:
+
+Scroll to SonarQube servers
+Click Add SonarQube
+Set Name: sonarqube (you'll reference this in the pipeline)
+Set Server URL: http://<your-sonarqube-host>:9000
+Add the token as a Secret text credential and select it
+
+In Jenkins → Manage Jenkins → Tools:
+
+Add a SonarQube Scanner installation (name it sonar-scanner)
+
+Step 2 - Project-Level Webhook
+
+Open your project
+Go to:
+Project Settings → Webhooks
+Click Create
+Set:
+
+Name: Jenkins
+URL: http://<jenkins-host>:8080/sonarqube-webhook/
+Secret: leave blank (or set one and add to Jenkins credentials)
+
+Click Save
+
+and then creae jenkis pilepine as usual and run it
+
+
+
